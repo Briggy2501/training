@@ -22,20 +22,6 @@ contactForm.addEventListener('submit', function(e) {
 
   const items = contactForm.querySelectorAll('.cf-item');
   const formItems = contactForm.querySelectorAll('.cf-input');
-
-  const resetForm = function() {
-    for (let i = 0; i < items.length; i++) {
-      const errors = items[i].querySelectorAll('.cf-error');
-      formItems[i].classList.remove('cf-error');
-      formItems[i].classList.remove('cf-error-border');
-      for (let j = 0; j < errors.length + 1; j++) {
-        if (errors[j]) {
-          items[i].removeChild(errors[j]);
-        }
-      }
-    }
-  };
-
   const firstName = formItems[0];
   const lastName = formItems[1];
   const email = formItems[2];
@@ -90,7 +76,18 @@ contactForm.addEventListener('submit', function(e) {
     }
   }
 
-  resetForm();
+  (function resetForm() {
+    for (let i = 0; i < items.length; i++) {
+      const errors = items[i].querySelectorAll('.cf-error');
+      formItems[i].classList.remove('cf-error');
+      formItems[i].classList.remove('cf-error-border');
+      for (let j = 0; j < errors.length + 1; j++) {
+        if (errors[j]) {
+          items[i].removeChild(errors[j]);
+        }
+      }
+    }
+  })();
   required();
   emailValidation();
   phoneValidation();
